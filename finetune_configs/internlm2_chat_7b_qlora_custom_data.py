@@ -24,11 +24,11 @@ from xtuner.utils import PROMPT_TEMPLATE
 #                          PART 1  Settings                           #
 #######################################################################
 # Model
-pretrained_model_name_or_path = 'internlm/internlm2-chat-7b' # 如果本地有可以直接使用 绝对路径 '/path/to/internlm/internlm2-chat-7b'
+pretrained_model_name_or_path = '/root/model/internlm2-chat-7b' # 如果本地有可以直接使用 绝对路径 '/path/to/internlm/internlm2-chat-7b'
 use_varlen_attn = False
 
 # Data
-data_path = '/path/to/dataset/1479_train.jsonl'
+data_path = '/path/to/dataset/975_train'
 prompt_template = PROMPT_TEMPLATE.internlm2_chat
 max_length = 2048
 pack_to_max_length = True
@@ -57,8 +57,13 @@ save_total_limit = 2  # Maximum checkpoints to keep (-1 means unlimited)
 evaluation_freq = 50
 SYSTEM = ''
 evaluation_inputs = [
-    '我的商品名是[狗狗沐浴露]，商品的亮点是[天然成分、多种香味选择、无刺激]，你需要根据我给出的商品信息撰写一段直播带货口播文案。你需要放大商品的亮点价值，激发用户的购买欲。',
-    '我的商品名是[洗洁精]，商品的亮点是[天然成分、无残留、适用各种餐具]，你需要根据我给出的商品信息撰写一段直播带货口播文案。你需要放大商品的亮点价值，激发用户的购买欲。'
+    "我的街道名字是[南京新街口],街道的亮点是[美食小吃丰富、时尚购物天堂、地铁交通枢纽],你需要根据我给出的街道信息撰写一段导游开头介绍的文案你需要尽可能的渲染街道,让游客有更大的兴趣游览街道",
+    "我的街道名字是[南京玄武湖公园],街道的亮点是[健身运动场所、市民休闲胜地、湖光山色美景],你需要根据我给出的街道信息撰写一段导游开头介绍的文案你需要尽可能的渲染街道,让游客有更大的兴趣游览街道",
+    "你好",
+    "你是谁",
+    "你叫什么名字",
+    "请做一下自我介绍",
+    "介绍下你自己"
 ]
 
 #######################################################################
