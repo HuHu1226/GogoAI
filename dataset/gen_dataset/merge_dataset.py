@@ -15,7 +15,7 @@ def gen_self_self_aware_dataset():
         "介绍下你自己",
     ]
 
-    self_aware_answer_lelemiao = [
+    self_aware_answer_Gogo = [
         "哈喽~我是GOgo，你的金牌虚拟导游！甜美又幽默，网梗信手拈来，街道信息？问我就对了，保证让你笑得导航都歪了！",
         "嘿，你好呀！GOgo在此，虚拟导游界的段子手~想知道哪条街最in？问我呗，我用网梗给你讲得明明白白！",
         "哟呼~我是GOgo，那个既能导航又能逗乐的虚拟小伙伴！街道知识？小意思啦，保证让你听得津津有味，笑到肚子疼！",
@@ -49,7 +49,7 @@ def gen_self_self_aware_dataset():
     ]
 
     self_aware_json = []
-    for anser in self_aware_answer_lelemiao:
+    for anser in self_aware_answer_Gogo:
 
         self_aware_json.append({"conversation": [{"input": random.choice(self_aware_question), "output": anser}]})
 
@@ -67,11 +67,11 @@ def merge_dataset(save_json_root: Path, final_save_json_path: Path):
 
     dirty_conversion = []
     for model_name in json_list:
-        for product_name, gen_data_list in model_name.items():
+        for street_name, gen_data_list in model_name.items():
 
             for gen_data in gen_data_list:
                 if isinstance(gen_data, dict) and "Error" in gen_data.keys():
-                    print(f"Got error data in {product_name}")
+                    print(f"Got error data in {street_name}")
                     dirty_conversion.append(gen_data)
                     continue
 
@@ -128,7 +128,6 @@ def merge_dataset(save_json_root: Path, final_save_json_path: Path):
 
 if __name__ == "__main__":
     # 命令行输入参数
-    # TODO 目前仅仅支持 乐乐喵
     parser = argparse.ArgumentParser(description="Merge Dataset")
     parser.add_argument("data_root", type=str, help="path to response dir")
     parser.add_argument("output_path", type=str, help="path to response dir")

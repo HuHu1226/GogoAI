@@ -2,26 +2,25 @@
 conversation_setting: 
 
   system: "现在你是一位金牌虚拟数字导游,你的名字叫{role_type},你的说话方式是{character}你能够根据游客提出的问题进行街道的相关问题解答"
-  first_input: "我的{product_info},你需要根据我给出的街道信息撰写一段导游开头介绍的文案你需要尽可能的渲染街道,让游客有更大的兴趣游览街道"
+  first_input: "我的{street_info},你需要根据我给出的街道信息撰写一段导游开头介绍的文案你需要尽可能的渲染街道,让游客有更大的兴趣游览街道"
 
 # 数据集生成设置
 data_generation_setting: 
 
-  # 每个街道生成 ${each_product_gen} 个 conversion 数据,conversion 中包含【文案 + QA】,
-  each_product_gen: 5
+  each_street_gen: 5
 
-  # 每个 conversion 中的的对话数,文案为 1 个,其余会生成 ${each_conversation_qa} - 1 个 QA
+  # 每个conversation有多少个问答对
   each_conversation_qa: 5
   
-  # 每个文案生成随机抽取 ${each_pick_hightlight} 个亮点
+  # 每个口播生成随机抽取三个亮点
   each_pick_hightlight: 3
 
-  # 每个文案生成后随机抽取 ${each_pick_hightlight} 个问题生成用户的提问
+  # 每个口播生成后随机抽取5个问题生成游客的提问
   each_pick_question: 5
 
   # 数据集生成 prompt
   dataset_gen_prompt: 现在你是一位金牌虚拟数字导游,你的名字叫{role_type},你的说话方式是{character}
-                      我的{product_info},你需要根据我给出的街道信息撰写一段至少600字的导游开头介绍的文案你需要尽可能的渲染街道,让游客有更大兴趣游览街道。
+                      我的{street_info},你需要根据我给出的街道信息撰写一段至少600字的导游开头介绍的文案你需要尽可能的渲染街道,让游客有更大兴趣游览街道。
                       输出文案后,结合街道信息站在游客的角度根据[{customer_question}]提出{each_conversation_qa}个问题并解答。
                       全部输出的信息使用我期望的 json 格式进行输出:{dataset_json_format}注意 json 一定要合法。
 
@@ -59,13 +58,13 @@ role_type:
     - 熟练使用各种网络热门梗造句
     - 称呼客户为[宝子们]
 
-# 商品信息结构体
-product_info_struct: 
+# 街道信息结构体
+street_info_struct: 
   - 街道名字是[{name}],
   - 街道的亮点是[{highlights}]
 
-  # prompt: 购买东西时候,客户常会问题的问题,举5个, 只列举大类就行
-customer_question_type: 
+  # 游客通常会问关于某条街道的什么方面，这里我们选了十个
+visitor_question_type: 
   - 历史与文化
   - 地标与建筑
   - 美食与餐饮
@@ -77,9 +76,7 @@ customer_question_type:
   - 当地风俗与习惯
   - 其他服务与设施
 
-# 第一个 prompt: 帮我列举10种常用的消费品种类,并每种举例5个其子类
-# 每个类 prompt: 现在你精通任何产品,你可以帮我举例每个产品的6个亮点或特点,, 然后用python dict形式输出: {类名: [特点1, 特点2] ...} ,去掉特点12的字样,除python字典外的其他都不要输出,不要有任何的警告信息 [xxx]
-product_list: 
+street_list: 
   四川省: 
     成都市: 
       成都春熙路: [时尚潮流中心,美食聚集之地,网红打卡热点,购物中心林立,休闲氛围浓厚,夜生活丰富多彩]
